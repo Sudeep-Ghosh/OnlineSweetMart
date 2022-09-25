@@ -1,10 +1,13 @@
 package com.onlinesweetmart.entity;
 
+import java.util.Locale.Category;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -24,23 +27,23 @@ public class Admin {
 	private String password;
 	
 	
-	//@OnetoOne
-	//private Customer customer;
+	@OneToOne
+	private Customer customer;
 	
-	//@OnetoOne
-	//@JoinColumn(name="user")
-	//private User user;
+	@OneToOne
+	@JoinColumn(name="user")
+	private User user;
 	
-	//@OnetoOne
-	//private Product product;
+	@OneToOne
+	private Product product;
 	
-	//@OnetoOne
-	//private Category category;
+	@OneToOne
+	private Category category;
 	
-	//@OnetoOne
-	//private Cart cart;
+	@OneToOne
+	private Cart cart;
 	
-	//private SweetItem item;
+	private SweetItem item;
 	
 	
 	

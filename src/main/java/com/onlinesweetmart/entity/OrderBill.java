@@ -21,5 +21,5 @@ public class OrderBill {
 	private int orderBillId;
 	private LocalDate localDate;
 	private float totalCost;
-	//private List<SweetOrder> listSweetOrder;
+	private List<SweetOrder> listSweetOrder;
 }
