@@ -3,6 +3,7 @@ package com.onlinesweetmart.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +18,7 @@ import com.onlinesweetmart.entity.Customer;
 import com.onlinesweetmart.service.CustomerService;
 
 @RestController
-@RequestMapping(value ="/onlineSweetMart/")
+@RequestMapping(value ="/onlineSweetMart")
 public class CustomerController {
 	
 	@Autowired
@@ -25,37 +26,38 @@ public class CustomerController {
 	
 	@PostMapping(value="customer")
 	public ResponseEntity<Customer> addCustomer(@RequestBody Customer customer){
-		customerService.addCustomer(customer);
-		return null;
+	Customer addedCustomer = customerService.addCustomer(customer);
+	 return new ResponseEntity<Customer>(addedCustomer, HttpStatus.OK);
 		
 	}
 	
 	@PutMapping(value="customer")
 	public ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer){
-		customerService.updateCustomer(customer);
-		return null;
+		Customer updatedCustomer =customerService.updateCustomer(customer);
+		 return new ResponseEntity<Customer>(updatedCustomer, HttpStatus.OK);
 		
 	}
 	
 	@DeleteMapping(value="customer/{customerId}")
-	public ResponseEntity<Customer> cancelCustomer(@PathVariable int customerId){
+	public ResponseEntity<Customer> cancelCustomer(@PathVariable long customerId){
 		customerService.cancelCustomer(customerId);
-		return null;
-		
+		 return new ResponseEntity<Customer>(HttpStatus.OK);	
 	}
 	
 	@GetMapping(value="customer")
 	public ResponseEntity<List<Customer>> showAllCustomers(){
-		customerService.showAllCustomers();
-		return null;
+	List<Customer> customerList=customerService.showAllCustomers();
+		 return new ResponseEntity<List<Customer>>(customerList, HttpStatus.OK);
 		
 	}
 	
 	@GetMapping(value="customer/{customerId}")
-	public ResponseEntity<Customer> showAllCustomers(@PathVariable int customerId){
-		customerService.showAllcustomers(customerId);
-		return null;
-		
+	public ResponseEntity<Customer> showAllCustomers(@PathVariable long customerId){
+		Customer customer=customerService.showAllcustomers(customerId);
+		 return new ResponseEntity<Customer>(customer, HttpStatus.OK);
 	}
 
 }
+
+
+

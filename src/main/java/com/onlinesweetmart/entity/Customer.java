@@ -10,27 +10,31 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity @AllArgsConstructor@NoArgsConstructor@Data
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor@Data
+@Table(name="Customer")
 public class Customer {
 	
     @Id@GeneratedValue(strategy = GenerationType.AUTO)
-	private int userId;
+	private Long userId;
     
-    @Column(length = 10,nullable = false)
-    private String username;
+    @Column(name="UserName")
+    private String userName;
     
-	@OneToMany
-	private Set<SweetOrder> sweetOrders;
-	
-	@OneToMany
-	private List<SweetItem> sweetItems;
-	
-	@OneToOne
-	private Cart cart;
+//	@OneToMany
+//	private Set<SweetOrder> sweetOrders;
+//	
+//	@OneToMany
+//	private List<SweetItem> sweetItems;
+//	
+//	@OneToOne
+//	private Cart cart;
 	
 }
