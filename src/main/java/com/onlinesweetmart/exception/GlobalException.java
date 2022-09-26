@@ -87,4 +87,14 @@ public class GlobalException extends ResponseEntityExceptionHandler {
 		
 		return new ResponseEntity<ErrorInfo>(errorInfo, HttpStatus.NOT_FOUND);
 	}
+	@ExceptionHandler(EmptyCustomerListException.class)
+	public ResponseEntity<ErrorInfo> emptyCustomerListException(EmptyCustomerListException exception)
+	{
+		ErrorInfo errorInfo = new ErrorInfo();
+		errorInfo.setErrorMessage(exception.getMsg());
+		errorInfo.setStatus(HttpStatus.NOT_FOUND.toString());
+		errorInfo.setLocalDateTime(LocalDateTime.now());
+		
+		return new ResponseEntity<ErrorInfo>(errorInfo, HttpStatus.NOT_FOUND);
+	}
 }
