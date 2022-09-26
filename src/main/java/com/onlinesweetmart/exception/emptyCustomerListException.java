@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
-@AllArgsConstructor
-public class emptyCustomerListException extends Exception{
+@AllArgsConstructor @Data
+public class EmptyCustomerListException extends Exception{
 	private static final long serialVersionUID = 1L;
 	String msg;
 }
