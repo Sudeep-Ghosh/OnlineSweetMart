@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.onlinesweetmart.entity.OrderBill;
+import com.onlinesweetmart.exception.IdNotFoundException;
 import com.onlinesweetmart.repository.OrderBillRepository;
 
 
@@ -20,12 +21,10 @@ public class OrderBillServiceImpl implements OrderBillService {
 	
 	/*
 	 * @Auther : Sudeep Ghosh
-	 * @Description : this is used to add,update,cancel 
-	 * or view an order bill
+	 * @Description : this is used to add an order bill
 	 * @Param : it takes orderBill as a parameter
 	 * @Return : it returns order bill
 	 * @Date Created : 24 Sept 2022
-	 * 
 	 */
 
 	@Override
@@ -34,36 +33,82 @@ public class OrderBillServiceImpl implements OrderBillService {
 		return orderBillRepository.save(orderBill);
 	}
 
+	/*
+	 * @Auther : Sudeep Ghosh
+	 * @Description : this is used to update an order bill
+	 * @Param : it takes orderBill as a parameter
+	 * @Return : it returns order bill
+	 * @Date Created : 24 Sept 2022
+	 */
+	
 	@Override
 	public OrderBill updateOrderBill(OrderBill orderBill) {
 		// TODO Auto-generated method stub
-		OrderBill existingOrderBill = orderBillRepository.findById(orderBill.getOrderBillId()).orElse(null);
+		OrderBill existingOrderBill = new OrderBill();
+		if(orderBillRepository.existsById(orderBill.getOrderBillId())) {
 		existingOrderBill.setLocalDate(orderBill.getLocalDate());
 		existingOrderBill.setTotalCost(orderBill.getTotalCost());
+		
 		return orderBillRepository.save(existingOrderBill);
-	}
-
-	@Override
-	public void cancelOrderBill(int orderBillId) {
-		// TODO Auto-generated method stub
-		Optional<OrderBill> orderBill =	orderBillRepository.findById(orderBillId);
-		if(orderBill.isPresent())
-		{
-		orderBillRepository.deleteById(orderBillId);
+		}
+		else {
+			throw new IdNotFoundException("The given Id is not present");
 		}
 	}
 
+	/*
+	 * @Auther : Sudeep Ghosh
+	 * @Description : this is used to cancel an order bill
+	 * @Param : it takes orderBill as a parameter
+	 * @Return : it returns order bill
+	 * @Date Created : 24 Sept 2022
+	 */
+	
+	@Override
+	public OrderBill cancelOrderBill(int orderBillId) {
+		// TODO Auto-generated method stub
+		OrderBill orderBill;
+		if(orderBillRepository.existsById(orderBillId)) {
+			orderBill = orderBillRepository.findById(orderBillId).get();
+			orderBillRepository.deleteById(orderBillId);
+			return orderBill;
+		}
+		else {
+			throw new IdNotFoundException("No order bill found with the given orderBillId");
+		}
+	}
+
+	/*
+	 * @Auther : Sudeep Ghosh
+	 * @Description : this is used to view an order bill
+	 * @Param : it takes orderBill as a parameter
+	 * @Return : it returns order bill list
+	 * @Date Created : 24 Sept 2022
+	 */
+	
 	@Override
 	public List<OrderBill> showAllOrderBills() {
 		// TODO Auto-generated method stub
 		return (List<OrderBill>) orderBillRepository.findAll();
 	}
 
+	/*
+	 * @Auther : Sudeep Ghosh
+	 * @Description : this is used to add an order bill
+	 * @Param : it takes orderBill id as a parameter
+	 * @Return : it returns order bill
+	 * @Date Created : 24 Sept 2022
+	 */
 
 	@Override
 	public OrderBill showOrderBillById(int orderBillId) {
 		// TODO Auto-generated method stub
-		return orderBillRepository.findById(orderBillId).get();
-	}
+		Optional<OrderBill> customer = orderBillRepository.findById(orderBillId);
+		if (customer.isPresent()) {
+			return customer.get();
+		} else {
+			throw new IdNotFoundException("The given order bill id: " + orderBillId + " is not present");
+		}
 
+	}
 }
