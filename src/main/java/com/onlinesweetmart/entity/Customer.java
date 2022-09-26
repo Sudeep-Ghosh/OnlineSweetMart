@@ -28,13 +28,13 @@ public class Customer {
     @Column(name="UserName")
     private String userName;
     
-//	@OneToMany
-//	private Set<SweetOrder> sweetOrders;
-//	
-//	@OneToMany
-//	private List<SweetItem> sweetItems;
-//	
-//	@OneToOne
-//	private Cart cart;
+	@OneToMany
+	private Set<SweetOrder> sweetOrders;
+	
+	@OneToMany
+	private List<SweetItem> sweetItems;
+	
+	@OneToOne
+	private Cart cart;
 	
 }
