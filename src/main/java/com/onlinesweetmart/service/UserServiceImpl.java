@@ -2,7 +2,6 @@ package com.onlinesweetmart.serviceImpl;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -88,11 +87,14 @@ public class UserServiceImpl implements UserService{
 	 * */
 	
 	@Override
-	public void cancelUser(long userId) {
-		Optional<User> user = userRepository.findById(userId);
-		if(user.isPresent())
+	public User cancelUser(long userId)
+	{
+		User user;
+		if(userRepository.existsById(userId))
 		{
+			user = userRepository.findById(userId).get();
 			userRepository.deleteById(userId);
+			return user;
 		}
 		else {
 			throw new IdNotFoundException("No user found with the given id");

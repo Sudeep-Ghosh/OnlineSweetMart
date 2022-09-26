@@ -10,7 +10,7 @@ public interface UserService {
 	
 	public User updateUser(User user, long userId);
 	
-	public void cancelUser(long userId);
+	public User cancelUser(long userId);
 	
 	public List<User> showAllUsers();
 }

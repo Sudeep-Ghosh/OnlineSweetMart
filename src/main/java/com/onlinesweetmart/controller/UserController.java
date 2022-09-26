@@ -35,9 +35,9 @@ public class UserController {
 	}
 	
 	@DeleteMapping("/cancelUser/{userId}")
-	public void cancelUser(@PathVariable("userId") long userId)
+	public User cancelUser(@PathVariable("userId") long userId)
 	{
-		userService.cancelUser(userId);
+		return userService.cancelUser(userId);
 	}
 	
 	@GetMapping("/showAllUsers")
