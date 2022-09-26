@@ -10,7 +10,7 @@ public interface CustomerService {
 	
 	public Customer updateCustomer(Customer customer);
 	
-	public void cancelCustomer(long customerId);
+	public Customer cancelCustomer(long customerId);
 	
 	public List<Customer> showAllCustomers();
 
