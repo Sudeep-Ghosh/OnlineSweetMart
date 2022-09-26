@@ -40,9 +40,9 @@ public class CustomerServiceImpl implements CustomerService {
 		
 		Customer existingCustomer = customerRepository.findById(customer.getUserId()).orElse(null);
 		existingCustomer.setUserName(customer.getUserName());
-//		existingCustomer.setSweetItems(customer.getSweetItems());
-//		existingCustomer.setSweetOrders(customer.getSweetOrders());
-//		existingCustomer.setCart(customer.getCart());
+		existingCustomer.setSweetItems(customer.getSweetItems());
+		existingCustomer.setSweetOrders(customer.getSweetOrders());
+		existingCustomer.setCart(customer.getCart());
 		return customerRepository.save(existingCustomer);
 	}
 	
