@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.onlinesweetmart.entity.Customer;
+import com.onlinesweetmart.exception.IdNotFoundException;
 import com.onlinesweetmart.repository.CustomerRepository;
 
 @Service
@@ -39,11 +40,16 @@ public class CustomerServiceImpl implements CustomerService {
 	public Customer updateCustomer(Customer customer) {
 		
 		Customer existingCustomer = customerRepository.findById(customer.getUserId()).orElse(null);
+		if(existingCustomer == null) {
+			throw new IdNotFoundException("Cutomer has not found to update details");
+		}
+		else {
 		existingCustomer.setUserName(customer.getUserName());
-		existingCustomer.setSweetItems(customer.getSweetItems());
+    	existingCustomer.setSweetItems(customer.getSweetItems());
 		existingCustomer.setSweetOrders(customer.getSweetOrders());
 		existingCustomer.setCart(customer.getCart());
 		return customerRepository.save(existingCustomer);
+	}
 	}
 	
 	/*
@@ -54,12 +60,17 @@ public class CustomerServiceImpl implements CustomerService {
 	 * @Date Created : 24 Sept 2022
 	 */
 	@Override
-	public void cancelCustomer(long customerId) {
+	public Customer cancelCustomer(long customerId) throws IdNotFoundException{
 		
 		Optional<Customer> customer =customerRepository.findById(customerId);
 		if(customer.isPresent())
 		{
+			Customer existingCustomer = customer.get();
 			customerRepository.deleteById(customerId);
+			return existingCustomer;
+		}
+		else {
+			throw new IdNotFoundException("Cutomer Id "+customerId+" is not found to be delete");
 		}
 	}
 	
@@ -72,9 +83,12 @@ public class CustomerServiceImpl implements CustomerService {
 	 * 
 	 */
 	@Override
-	public List<Customer> showAllCustomers() {
-		
-		return customerRepository.findAll();
+	public List<Customer> showAllCustomers() throws emptyCustomerListException {
+        List<Customer> customers=customerRepository.findAll();
+        if(customers.isEmpty()) {
+        	throw new emptyCustomerListException("There is no customer to show");
+        }
+		return customers;
 	}
 	
 	/*
@@ -88,7 +102,13 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public Customer showAllcustomers(long customerId) {
 		
-		return customerRepository.findById(customerId).get();
+		Optional<Customer> customer= customerRepository.findById(customerId);
+		if(customer.isPresent()) {
+			return customer.get();
+		}
+		else {
+			throw new IdNotFoundException("Cutomer Id "+customerId+" is not present");
+		}
 	}
 
 }
