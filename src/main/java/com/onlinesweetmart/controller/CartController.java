@@ -18,7 +18,7 @@ import com.onlinesweetmart.entity.Cart;
 import com.onlinesweetmart.service.CartService;
 
 @RestController
-@RequestMapping
+@RequestMapping(value="/api/v1")
 public class CartController {
 	
 	@Autowired
