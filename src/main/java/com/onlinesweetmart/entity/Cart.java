@@ -10,8 +10,13 @@ import javax.persistence.OneToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
 @Table
+@Data @AllArgsConstructor @NoArgsConstructor
 public class Cart {
 	
 	@Id
@@ -29,65 +34,7 @@ public class Cart {
 	@OneToOne
 	private Customer customer;
 	
-	
-	public Cart(double grandTotal, List<Product> listProduct, int cartId, int productCount, double total) {
-		super();
-		this.grandTotal = grandTotal;
-		this.listProduct = listProduct;
-		this.cartId = cartId;
-		this.productCount = productCount;
-		this.total = total;
-	}
 
-
-	public double getGrandTotal() {
-		return grandTotal;
-	}
-
-
-	public void setGrandTotal(double grandTotal) {
-		this.grandTotal = grandTotal;
-	}
-
-
-	public List<Product> getListProduct() {
-		return listProduct;
-	}
-
-
-	public void setListProduct(List<Product> listProduct) {
-		this.listProduct = listProduct;
-	}
-
-
-	public int getCartId() {
-		return cartId;
-	}
-
-
-	public void setCartId(int cartId) {
-		this.cartId = cartId;
-	}
-
-
-	public int getProductCount() {
-		return productCount;
-	}
-
-
-	public void setProductCount(int productCount) {
-		this.productCount = productCount;
-	}
-
-
-	public double getTotal() {
-		return total;
-	}
-
-
-	public void setTotal(double total) {
-		this.total = total;
-	}
 	
 
 }
