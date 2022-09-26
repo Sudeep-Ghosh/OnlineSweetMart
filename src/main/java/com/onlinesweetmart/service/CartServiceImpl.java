@@ -1,12 +1,12 @@
 package com.onlinesweetmart.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.onlinesweetmart.entity.Cart;
+import com.onlinesweetmart.exception.IdNotFoundException;
 import com.onlinesweetmart.repository.CartRepository;
 
 @Service
@@ -32,6 +32,14 @@ public class CartServiceImpl implements CartService {
 	}
 	
 	
+	/*
+	 * @Author : ishika
+	 * @description : this is used to show all the carts
+	 * @Param : It takes cart as a parameter
+	 * @Return : It returns lsit of carts
+	 * @CreatedDate: 24 september 2022
+	 * 
+	 */
 	
 	
 	@Override
@@ -41,7 +49,14 @@ public class CartServiceImpl implements CartService {
 	}
 	
 	
-	
+	/*
+	 * @Author : ishika
+	 * @description : this is used to update a cart
+	 * @Param : It takes cart as a parameter
+	 * @Return : It returns the updated cart
+	 * @CreatedDate: 24 september 2022
+	 * 
+	 */
 	
 	
 	@Override
@@ -55,20 +70,40 @@ public class CartServiceImpl implements CartService {
 	}
 	
 	
+	/*
+	 * @Author : ishika
+	 * @description : this is used to cancel a cart
+	 * @Param : It takes cartId as a parameter
+	 * @Return : It returns canceled cart
+	 * @CreatedDate: 24 september 2022
+	 * 
+	 */
 	
 	
 	@Override
-	public void cancelCart(int cartId) {
+	public Cart cancelCart(int cartId) {
 		
-		Optional<Cart> cart = cartRepository.findById(cartId);
-		if(cart.isPresent()) 
+		Cart cart;
+		if(cartRepository.existsById(cartId))
 		{
+			cart = cartRepository.findById(cartId).get();
 			cartRepository.deleteById(cartId);
+			return cart;
+		}
+		else {
+			throw new IdNotFoundException("Cart not found of given Id") ; 
 		}
 	}
 	
 	
-
+	/*
+	 * @Author : ishika
+	 * @description : this is used to show cart of given id
+	 * @Param : It takes cartId as a parameter
+	 * @Return : It returns cart with the given id
+	 * @CreatedDate: 24 september 2022
+	 * 
+	 */
 
 	@Override
 	public Cart showCartsById(int cartId) {
