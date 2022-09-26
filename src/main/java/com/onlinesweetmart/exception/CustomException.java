@@ -1,10 +1,16 @@
 package com.onlinesweetmart.exception;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data @AllArgsConstructor
+@Getter
+@Setter
+@AllArgsConstructor
 public class CustomException extends RuntimeException {
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String msg;
 }

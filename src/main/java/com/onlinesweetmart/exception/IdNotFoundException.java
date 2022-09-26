@@ -1,16 +1,16 @@
 package com.onlinesweetmart.exception;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-@NoArgsConstructor
+@Getter
+@Setter
 @AllArgsConstructor
-@Data
 public class IdNotFoundException extends RuntimeException{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	String msg;
+	String msg;		
 }

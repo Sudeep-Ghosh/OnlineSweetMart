@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.onlinesweetmart.entity.User;
-import com.onlinesweetmart.serviceImpl.UserServiceImpl;
+import com.onlinesweetmart.service.UserServiceImpl;
 
 @RestController
 @RequestMapping("/user")
@@ -22,25 +22,25 @@ public class UserController {
 	@Autowired
 	public UserServiceImpl userService;
 	
-	@PostMapping("/addUser")
+	@PostMapping("/user")
 	public User addUser(@RequestBody User user)
 	{
 		return userService.addUser(user);
 	}
 	
-	@PutMapping("/updateUser/{userId}")
+	@PutMapping("/user/{userId}")
 	public User updateUser(@RequestBody User user, @PathVariable("userId") long userId)
 	{
 		return userService.updateUser(user, userId);
 	}
 	
-	@DeleteMapping("/cancelUser/{userId}")
+	@DeleteMapping("/user/{userId}")
 	public User cancelUser(@PathVariable("userId") long userId)
 	{
 		return userService.cancelUser(userId);
 	}
 	
-	@GetMapping("/showAllUsers")
+	@GetMapping("/user")
 	public List<User> showAllUsers()
 	{
 		return userService.showAllUsers();

@@ -1,4 +1,4 @@
-package com.onlinesweetmart.serviceImpl;
+package com.onlinesweetmart.service;
 
 import java.util.List;
 import java.util.Objects;
@@ -12,7 +12,6 @@ import com.onlinesweetmart.exception.InvalidPasswordException;
 import com.onlinesweetmart.exception.InvalidUserNameException;
 import com.onlinesweetmart.exception.PasswordMismatchException;
 import com.onlinesweetmart.repository.UserRepository;
-import com.onlinesweetmart.service.UserService;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -21,10 +20,10 @@ public class UserServiceImpl implements UserService{
 	public UserRepository userRepository;
 	
 	/*
-	 * @Author : Kshitiz
-	 * @Description : this is used to add a new user to the database
-	 * @Param : it takes user as a parameter
-	 * @Return : it returns the saved user
+	 * @Author : Kshitiz Zamindar
+	 * @Description : This is used to add a new user to the database
+	 * @Param : It takes user as a parameter
+	 * @Return : It returns the saved user
 	 * @Date Created : 24 Sept 2022
 	 * 
 	 * */	
@@ -37,10 +36,10 @@ public class UserServiceImpl implements UserService{
 	}
 
 	/*
-	 * @Author : Kshitiz
-	 * @Description : this is used to update an existing user in the database
-	 * @Param : it takes user and userId as parameters
-	 * @Return : it returns updated user
+	 * @Author : Kshitiz Zamindar
+	 * @Description : This is used to update an existing user in the database
+	 * @Param : It takes user and userId as parameters
+	 * @Return : It returns updated user
 	 * @Date Created : 24 Sept 2022
 	 * 
 	 * */
@@ -78,10 +77,10 @@ public class UserServiceImpl implements UserService{
 	}
 
 	/*
-	 * @Author : Kshitiz
-	 * @Description : this is used to delete a user from the database
-	 * @Param : it takes userId as a parameter
-	 * @Return : it does not return anything
+	 * @Author : Kshitiz Zamindar
+	 * @Description : This is used to delete a user from the database
+	 * @Param : It takes userId as a parameter
+	 * @Return : It does not return anything
 	 * @Date Created : 24 Sept 2022
 	 * 
 	 * */
@@ -102,10 +101,10 @@ public class UserServiceImpl implements UserService{
 	}
 
 	/*
-	 * @Author : Kshitiz
-	 * @Description : this is used to show all the existing users in the database
-	 * @Param : it does not take any parameter
-	 * @Return : it returns a list of all the users
+	 * @Author : Kshitiz Zamindar
+	 * @Description : This is used to show all the existing users in the database
+	 * @Param : It does not take any parameter
+	 * @Return : It returns a list of all the users
 	 * @Date Created : 24 Sept 2022
 	 * 
 	 * */

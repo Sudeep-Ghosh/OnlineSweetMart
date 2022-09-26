@@ -54,4 +54,37 @@ public class GlobalException extends ResponseEntityExceptionHandler {
 		
 		return new ResponseEntity<ErrorInfo>(errorInfo, HttpStatus.NOT_FOUND);
 	}
+	
+	@ExceptionHandler(InvalidUserNameException.class)
+	public ResponseEntity<ErrorInfo> invalidUserNameException(InvalidUserNameException exception)
+	{
+		ErrorInfo errorInfo = new ErrorInfo();
+		errorInfo.setErrorMessage(exception.getMsg());
+		errorInfo.setStatus(HttpStatus.NOT_FOUND.toString());
+		errorInfo.setLocalDateTime(LocalDateTime.now());
+		
+		return new ResponseEntity<ErrorInfo>(errorInfo, HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(InvalidPasswordException.class)
+	public ResponseEntity<ErrorInfo> invalidPasswordException(InvalidPasswordException exception)
+	{
+		ErrorInfo errorInfo = new ErrorInfo();
+		errorInfo.setErrorMessage(exception.getMsg());
+		errorInfo.setStatus(HttpStatus.NOT_FOUND.toString());
+		errorInfo.setLocalDateTime(LocalDateTime.now());
+		
+		return new ResponseEntity<ErrorInfo>(errorInfo, HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(PasswordMismatchException.class)
+	public ResponseEntity<ErrorInfo> passwordMismatchException(PasswordMismatchException exception)
+	{
+		ErrorInfo errorInfo = new ErrorInfo();
+		errorInfo.setErrorMessage(exception.getMsg());
+		errorInfo.setStatus(HttpStatus.NOT_FOUND.toString());
+		errorInfo.setLocalDateTime(LocalDateTime.now());
+		
+		return new ResponseEntity<ErrorInfo>(errorInfo, HttpStatus.NOT_FOUND);
+	}
 }
