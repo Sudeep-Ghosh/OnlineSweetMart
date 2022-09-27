@@ -16,7 +16,7 @@ import com.onlinesweetmart.entity.User;
 import com.onlinesweetmart.service.UserServiceImpl;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/v1")
 public class UserController {
 	
 	@Autowired
