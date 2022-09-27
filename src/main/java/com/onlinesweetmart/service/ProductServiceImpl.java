@@ -68,6 +68,10 @@ public class ProductServiceImpl implements ProductService {
 				fetchProduct.get().setAvailable(product.getAvailable());
 			}
 			
+			if (Objects.nonNull(product.getCategory().getName())&& !"".equalsIgnoreCase(product.getCategory().getName())) {
+				fetchProduct.get().setCategory(product.getCategory());
+			}
+			
 			productRepository.save(fetchProduct.get());
 			return fetchProduct.get();
 		}

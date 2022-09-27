@@ -18,7 +18,7 @@ import com.onlinesweetmart.entity.Customer;
 import com.onlinesweetmart.service.CustomerService;
 
 @RestController
-@RequestMapping(value ="/onlineSweetMart")
+@RequestMapping(value ="/api/v1")
 public class CustomerController {
 	
 	@Autowired
