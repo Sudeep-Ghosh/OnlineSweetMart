@@ -2,11 +2,13 @@ package com.onlinesweetmart.service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.onlinesweetmart.entity.User;
+import com.onlinesweetmart.exception.EmptyUserListException;
 import com.onlinesweetmart.exception.IdNotFoundException;
 import com.onlinesweetmart.exception.InvalidPasswordException;
 import com.onlinesweetmart.exception.InvalidUserNameException;
@@ -45,35 +47,41 @@ public class UserServiceImpl implements UserService{
 	 * */
 	
 	@Override
-	public User updateUser(User user, long userId) {
+	public User updateUser(User user) {
 		
-		User userDb =  userRepository.findById(userId).get();
+		Optional<User> userDb =  userRepository.findById(user.getUserId());
 		
-		if(Objects.nonNull(user.getUserName()) && !"".equalsIgnoreCase(user.getUserName()))
+		if(userDb.isPresent())
 		{
-			userDb.setUserName(user.getUserName());
-		}	
+			if(Objects.nonNull(user.getUserName()) && !"".equalsIgnoreCase(user.getUserName()))
+			{
+				userDb.get().setUserName(user.getUserName());
+			}	
+			else {
+				throw new InvalidUserNameException("Invalid User Name");
+			}
+			
+			if(Objects.nonNull(user.getPassword()) && !"".equalsIgnoreCase(user.getPassword()))
+			{
+				userDb.get().setPassword(user.getPassword());
+			}
+			else {
+				throw new InvalidPasswordException("Invalid Password");
+			}
+			
+			if(Objects.nonNull(user.getPasswordConfirm()) && !"".equalsIgnoreCase(user.getPasswordConfirm()) && user.getPassword().equalsIgnoreCase(user.getPasswordConfirm()))
+			{
+				userDb.get().setPasswordConfirm(user.getPasswordConfirm());
+			}
+			else {
+				throw new PasswordMismatchException("The passwords do not match");
+			}
+			userRepository.save(userDb.get());
+			return userDb.get();
+		}
 		else {
-			throw new InvalidUserNameException("Invalid User Name");
-		}
-		
-		if(Objects.nonNull(user.getPassword()) && !"".equalsIgnoreCase(user.getPassword()))
-		{
-			userDb.setPassword(user.getPassword());
-		}
-		else {
-			throw new InvalidPasswordException("Invalid Password");
-		}
-		
-		if(Objects.nonNull(user.getPasswordConfirm()) && !"".equalsIgnoreCase(user.getPasswordConfirm()))
-		{
-			userDb.setPasswordConfirm(user.getPasswordConfirm());
-		}
-		else {
-			throw new PasswordMismatchException("The passwords do not match");
-		}
-		
-		return userRepository.save(userDb);
+			throw new IdNotFoundException("No id found to update user");
+		}		
 	}
 
 	/*
@@ -111,7 +119,13 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	public List<User> showAllUsers() {
-		return userRepository.findAll();
+		
+		List<User> userList = userRepository.findAll();
+		if(userList.isEmpty())
+		{
+			throw new EmptyUserListException("No user found in the user list");
+		}
+		return userList;
 	}
 
 }
