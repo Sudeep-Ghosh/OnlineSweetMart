@@ -103,9 +103,9 @@ public class OrderBillServiceImpl implements OrderBillService {
 	@Override
 	public OrderBill showOrderBillById(int orderBillId) {
 		// TODO Auto-generated method stub
-		Optional<OrderBill> customer = orderBillRepository.findById(orderBillId);
-		if (customer.isPresent()) {
-			return customer.get();
+		Optional<OrderBill> orderBill = orderBillRepository.findById(orderBillId);
+		if (orderBill.isPresent()) {
+			return orderBill.get();
 		} else {
 			throw new IdNotFoundException("The given order bill id: " + orderBillId + " is not present");
 		}
