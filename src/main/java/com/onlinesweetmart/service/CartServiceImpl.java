@@ -62,11 +62,19 @@ public class CartServiceImpl implements CartService {
 	@Override
 	public Cart updateCart(Cart cart) {
 		
-		Cart existingCart = cartRepository.findById(cart.getCartId()).orElse(null);
+		Cart existingCart = new Cart();
+		if(cartRepository.existsById(cart.getCartId())) {
+		existingCart.setCustomer(cart.getCustomer());
 		existingCart.setGrandTotal(cart.getGrandTotal());
+		existingCart.setListProduct(cart.getListProduct());
 		existingCart.setProductCount(cart.getProductCount());
 		existingCart.setTotal(cart.getTotal());
+		
 		return cartRepository.save(existingCart);
+		}
+		else {
+			throw new IdNotFoundException("The given Id is not present");
+		}
 	}
 	
 	
@@ -108,7 +116,12 @@ public class CartServiceImpl implements CartService {
 	@Override
 	public Cart showCartsById(int cartId) {
 		// TODO Auto-generated method stub
-		return cartRepository.findById(cartId).get();
+		Optional<Cart> cart = cartRepository.findById(cartId);
+		if (cart.isPresent()) {
+			return cart.get();
+		} else {
+			throw new IdNotFoundException("The given order bill id: " + cartId + " is not present");
+		}
 	}
 
 }
