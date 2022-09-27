@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 public class OrderBill {
 	@Id
 	private int orderBillId;
-	private LocalDate localDate;
+	private LocalDate createdDate;
 	private float totalCost;
 	
 	@OneToMany

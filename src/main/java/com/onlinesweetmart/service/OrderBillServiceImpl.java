@@ -46,7 +46,7 @@ public class OrderBillServiceImpl implements OrderBillService {
 		// TODO Auto-generated method stub
 		OrderBill existingOrderBill = new OrderBill();
 		if(orderBillRepository.existsById(orderBill.getOrderBillId())) {
-		existingOrderBill.setLocalDate(orderBill.getLocalDate());
+		existingOrderBill.setCreatedDate(orderBill.getCreatedDate());
 		existingOrderBill.setTotalCost(orderBill.getTotalCost());
 		
 		return orderBillRepository.save(existingOrderBill);
