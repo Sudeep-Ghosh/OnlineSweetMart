@@ -1,6 +1,5 @@
 package com.onlinesweetmart.entity;
 
-import java.util.Locale.Category;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,37 +13,43 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
+@Entity
+@Table(name = "admin")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name="admin")
 public class Admin {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private String adminId;
+	private int adminId;
 	private String password;
 	
 	
 	@OneToOne
+	@JoinColumn
 	private Customer customer;
 	
 	@OneToOne
-	@JoinColumn(name="user")
+	@JoinColumn
 	private User user;
 	
 	@OneToOne
+	@JoinColumn
 	private Product product;
 	
 	@OneToOne
+	@JoinColumn
 	private Category category;
 	
-	@OneToOne
+	@OneToOne 
+	@JoinColumn(name="cart_id")
 	private Cart cart;
 	
-	private SweetItem item;
+	//@OneToOne
+	//private SweetItem item;
 	
 	
 	
+
 }

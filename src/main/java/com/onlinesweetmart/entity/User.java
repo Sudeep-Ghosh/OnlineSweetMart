@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -13,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "user")
+@Table(name = "users") // change in name-user to users
 public class User {
 	
 	@Id
@@ -25,6 +26,6 @@ public class User {
 	private String passwordConfirm;
 	private String type;
 	
-	//@OneToOne(mappedBy = "user")	
-	//public Admin admin;
+	@OneToOne(mappedBy = "user")	
+	public Admin admin;
 }

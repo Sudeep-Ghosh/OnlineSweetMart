@@ -6,7 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -23,13 +24,16 @@ public class Cart {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int cartId;
 	private double grandTotal;
+	
+	@OneToMany
+	@JoinColumn
 	private List<Product> listProduct;
 	private int productCount;
 	private double total;
 	
 	
-	@OneToOne
-	private Admin admin;
+	//@OneToOne
+	//private Admin admin;
 	
 	@OneToOne
 	private Customer customer;
