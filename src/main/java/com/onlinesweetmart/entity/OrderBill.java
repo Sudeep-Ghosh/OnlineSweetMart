@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -21,5 +23,8 @@ public class OrderBill {
 	private int orderBillId;
 	private LocalDate localDate;
 	private float totalCost;
+	
+	@OneToMany
+	@JoinColumn
 	private List<SweetOrder> listSweetOrder;
 }
