@@ -16,7 +16,7 @@ import com.onlinesweetmart.entity.User;
 import com.onlinesweetmart.service.UserServiceImpl;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/v1")
 public class UserController {
 	
 	@Autowired
@@ -29,9 +29,9 @@ public class UserController {
 	}
 	
 	@PutMapping("/user/{userId}")
-	public User updateUser(@RequestBody User user)
+	public User updateUser(@RequestBody User user, @PathVariable("userId") long userId)
 	{
-		return userService.updateUser(user);
+		return userService.updateUser(user, userId);
 	}
 	
 	@DeleteMapping("/user/{userId}")

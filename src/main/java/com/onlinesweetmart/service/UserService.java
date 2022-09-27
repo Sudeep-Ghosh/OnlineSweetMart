@@ -8,7 +8,7 @@ public interface UserService {
 	
 	public User addUser(User user);
 	
-	public User updateUser(User user);
+	public User updateUser(User user, long userId);
 	
 	public User cancelUser(long userId);
 	

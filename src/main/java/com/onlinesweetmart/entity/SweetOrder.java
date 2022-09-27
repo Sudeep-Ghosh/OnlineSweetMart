@@ -22,11 +22,11 @@ public class SweetOrder {
 	private int sweetOrderId;
 	
 	@ManyToOne
-	@JoinColumn
+	@JoinColumn(name = "user_id")
 	private User user;
 	
 	@OneToMany
-	@JoinColumn
+	@JoinColumn(name = "listItem_id")
 	private List<SweetItem> listItems;
 	
 	private LocalDate createdDate;

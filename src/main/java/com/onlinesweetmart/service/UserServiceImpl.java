@@ -47,9 +47,9 @@ public class UserServiceImpl implements UserService{
 	 * */
 	
 	@Override
-	public User updateUser(User user) {
+	public User updateUser(User user, long userId) {
 		
-		Optional<User> userDb =  userRepository.findById(user.getUserId());
+		Optional<User> userDb =  userRepository.findById(userId);
 		
 		if(userDb.isPresent())
 		{
@@ -81,7 +81,7 @@ public class UserServiceImpl implements UserService{
 		}
 		else {
 			throw new IdNotFoundException("No id found to update user");
-		}		
+		}			
 	}
 
 	/*
@@ -127,5 +127,4 @@ public class UserServiceImpl implements UserService{
 		}
 		return userList;
 	}
-
 }
