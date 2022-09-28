@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.onlinesweetmart.entity.Category;
+import com.onlinesweetmart.exception.EmptyCategoryListException;
 import com.onlinesweetmart.exception.IdNotFoundException;
 import com.onlinesweetmart.repository.CategoryRepository;
 
@@ -89,8 +90,14 @@ public class CategoryServiceImpl implements CategoryService {
 	 * */
 	
 	@Override
-	public List<Category> showAllCategories() {
-		return categoryRepository.findAll();
+	public List<Category> showAllCategories() throws EmptyCategoryListException {
+		List<Category> fetchCategories = categoryRepository.findAll();
+		
+		if(fetchCategories.isEmpty()) {
+			throw new EmptyCategoryListException("No categories found in the category list");
+		}
+		
+		return fetchCategories;
 	}
 
 }

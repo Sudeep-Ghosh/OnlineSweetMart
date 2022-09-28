@@ -3,6 +3,7 @@ package com.onlinesweetmart.service;
 import java.util.List;
 
 import com.onlinesweetmart.entity.Category;
+import com.onlinesweetmart.exception.EmptyCategoryListException;
 import com.onlinesweetmart.exception.IdNotFoundException;
 
 public interface CategoryService {
@@ -13,6 +14,6 @@ public interface CategoryService {
 
 	public Category cancelCategory(Integer categoryId) throws IdNotFoundException;
 
-	public List<Category> showAllCategories();
+	public List<Category> showAllCategories() throws EmptyCategoryListException;
 
 }

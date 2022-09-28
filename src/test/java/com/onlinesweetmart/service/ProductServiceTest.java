@@ -16,6 +16,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.onlinesweetmart.entity.Category;
 import com.onlinesweetmart.entity.Product;
+import com.onlinesweetmart.exception.EmptyProductListException;
 import com.onlinesweetmart.exception.IdNotFoundException;
 import com.onlinesweetmart.exception.ProductNotFoundException;
 import com.onlinesweetmart.repository.ProductRepository;
@@ -90,7 +91,7 @@ public class ProductServiceTest {
 	 */
 	@Test
 	@DisplayName("Test Product Service to fetch all products from DB")
-	public void showAllProductsTestCase() {
+	public void showAllProductsTestCase() throws EmptyProductListException {
 		Category category = Category.builder().categoryId(1).name("Regular Sweets").build();
 
 		Product product = Product.builder().productId(12).name("Barfi").photoPath("www.google.com").price(150.44)

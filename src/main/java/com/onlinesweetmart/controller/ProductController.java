@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.onlinesweetmart.entity.Product;
+import com.onlinesweetmart.exception.EmptyProductListException;
 import com.onlinesweetmart.exception.IdNotFoundException;
 import com.onlinesweetmart.exception.ProductNotFoundException;
 import com.onlinesweetmart.service.ProductService;
@@ -57,7 +58,7 @@ public class ProductController {
 	}
 	
 	@GetMapping(value = "/product")
-		public ResponseEntity<List<Product>> showAllProducts(){
+		public ResponseEntity<List<Product>> showAllProducts() throws EmptyProductListException{
 			List<Product> fetchAllResultProducts = productService.showAllProducts();
 			
 			return new ResponseEntity<List<Product>>(fetchAllResultProducts, HttpStatus.OK);

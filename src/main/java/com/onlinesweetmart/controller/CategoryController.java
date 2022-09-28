@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.onlinesweetmart.entity.Category;
+import com.onlinesweetmart.exception.EmptyCategoryListException;
 import com.onlinesweetmart.exception.IdNotFoundException;
 import com.onlinesweetmart.service.CategoryService;
 
@@ -49,7 +50,7 @@ public class CategoryController {
 	}
 	
 	@GetMapping(value = "/category")
-	public ResponseEntity<List<Category>> showAllCategories(){
+	public ResponseEntity<List<Category>> showAllCategories() throws EmptyCategoryListException{
 		List<Category> fetchAllResultCategories = categoryService.showAllCategories();
 		
 		return new ResponseEntity<List<Category>>(fetchAllResultCategories, HttpStatus.OK);

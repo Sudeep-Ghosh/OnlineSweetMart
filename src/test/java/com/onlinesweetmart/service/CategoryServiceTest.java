@@ -15,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.onlinesweetmart.entity.Category;
+import com.onlinesweetmart.exception.EmptyCategoryListException;
 import com.onlinesweetmart.exception.IdNotFoundException;
 import com.onlinesweetmart.repository.CategoryRepository;
 
@@ -77,7 +78,7 @@ public class CategoryServiceTest {
 	 */
 	@Test
 	@DisplayName("Test Category service showAllCategories fetched categories based on the service call")
-	public void showAllCategoriesTestCase() {
+	public void showAllCategoriesTestCase() throws EmptyCategoryListException {
 		List<Category> fetchCategories = categoryService.showAllCategories();
 		Category mockCategory = Category.builder().name("Rasmalai").build();
 
