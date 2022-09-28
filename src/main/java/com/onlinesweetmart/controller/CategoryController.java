@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.onlinesweetmart.entity.Category;
+import com.onlinesweetmart.exception.EmptyCategoryListException;
 import com.onlinesweetmart.exception.IdNotFoundException;
+import com.onlinesweetmart.exception.InvalidCategoryDataException;
 import com.onlinesweetmart.service.CategoryService;
 
 import java.util.List;
@@ -33,7 +35,7 @@ public class CategoryController {
 	}
 	
 	@PutMapping(value = "/category")
-	public ResponseEntity<Category> updateCategory(@RequestBody Category category) throws IdNotFoundException{
+	public ResponseEntity<Category> updateCategory(@RequestBody Category category) throws IdNotFoundException, InvalidCategoryDataException{
 		Category fetchUpdatedResultCategory = categoryService.updateCategory(category);
 		
 		return new ResponseEntity<Category>(fetchUpdatedResultCategory, HttpStatus.OK);
@@ -49,7 +51,7 @@ public class CategoryController {
 	}
 	
 	@GetMapping(value = "/category")
-	public ResponseEntity<List<Category>> showAllCategories(){
+	public ResponseEntity<List<Category>> showAllCategories() throws EmptyCategoryListException{
 		List<Category> fetchAllResultCategories = categoryService.showAllCategories();
 		
 		return new ResponseEntity<List<Category>>(fetchAllResultCategories, HttpStatus.OK);
