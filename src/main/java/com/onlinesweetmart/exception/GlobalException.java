@@ -108,4 +108,15 @@ public class GlobalException extends ResponseEntityExceptionHandler {
 		
 		return new ResponseEntity<ErrorInfo>(errorInfo, HttpStatus.NOT_FOUND);
 	}
+	
+	@ExceptionHandler(UserAlreadyExistsException.class)
+	public ResponseEntity<ErrorInfo> userAlreadyExistsException(UserAlreadyExistsException exception)
+	{
+		ErrorInfo errorInfo = new ErrorInfo();
+		errorInfo.setErrorMessage(exception.getMsg());
+		errorInfo.setStatus(HttpStatus.NOT_FOUND.toString());
+		errorInfo.setLocalDateTime(LocalDateTime.now());
+		
+		return new ResponseEntity<ErrorInfo>(errorInfo, HttpStatus.NOT_FOUND);
+	}
 }

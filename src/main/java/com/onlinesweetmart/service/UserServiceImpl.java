@@ -13,6 +13,7 @@ import com.onlinesweetmart.exception.IdNotFoundException;
 import com.onlinesweetmart.exception.InvalidPasswordException;
 import com.onlinesweetmart.exception.InvalidUserNameException;
 import com.onlinesweetmart.exception.PasswordMismatchException;
+import com.onlinesweetmart.exception.UserAlreadyExistsException;
 import com.onlinesweetmart.repository.UserRepository;
 
 @Service
@@ -47,9 +48,9 @@ public class UserServiceImpl implements UserService{
 	 * */
 	
 	@Override
-	public User updateUser(User user, long userId) {
+	public User updateUser(User user) {
 		
-		Optional<User> userDb =  userRepository.findById(userId);
+		Optional<User> userDb =  userRepository.findById(user.getUserId());
 		
 		if(userDb.isPresent())
 		{
@@ -76,11 +77,19 @@ public class UserServiceImpl implements UserService{
 			else {
 				throw new PasswordMismatchException("The passwords do not match");
 			}
+			
+			if(Objects.nonNull(user.getType()) && !"".equalsIgnoreCase(user.getType()))
+			{
+				userDb.get().setType(user.getType());
+			}
+			else {
+				throw new UserAlreadyExistsException("User with id: " + user.getUserId() + " already exists");
+			}
 			userRepository.save(userDb.get());
 			return userDb.get();
 		}
 		else {
-			throw new IdNotFoundException("No id found to update user");
+			throw new IdNotFoundException("No user found with the user id: " + user.getUserId());
 		}			
 	}
 

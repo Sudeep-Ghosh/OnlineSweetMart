@@ -27,17 +27,11 @@ public class Cart {
 	@OneToMany(mappedBy = "cart")	
 	private List<Product> listProduct;
 	private int productCount;
-	private double total;
-	
-	
+	private double total;	
 	
 	//@OneToOne
 	//private Admin admin;
 	
 	@OneToOne
 	private Customer customer;
-	
-
-	
-
 }

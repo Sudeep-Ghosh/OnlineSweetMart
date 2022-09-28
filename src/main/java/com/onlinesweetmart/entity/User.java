@@ -4,17 +4,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Data @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "users") // change in name-user to users
+@Builder
+@Table(name = "users")
 public class User {
 	
 	@Id
@@ -24,8 +25,5 @@ public class User {
 	private String userName;
 	private String password;
 	private String passwordConfirm;
-	private String type;
-	
-	@OneToOne(mappedBy = "user")	
-	public Admin admin;
+	private String type;	
 }

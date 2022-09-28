@@ -28,10 +28,10 @@ public class UserController {
 		return userService.addUser(user);
 	}
 	
-	@PutMapping("/user/{userId}")
-	public User updateUser(@RequestBody User user, @PathVariable("userId") long userId)
+	@PutMapping("/user")
+	public User updateUser(@RequestBody User user)
 	{
-		return userService.updateUser(user, userId);
+		return userService.updateUser(user);
 	}
 	
 	@DeleteMapping("/user/{userId}")
