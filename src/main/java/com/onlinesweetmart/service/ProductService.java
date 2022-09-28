@@ -3,6 +3,7 @@ package com.onlinesweetmart.service;
 import java.util.List;
 
 import com.onlinesweetmart.entity.Product;
+import com.onlinesweetmart.exception.EmptyProductListException;
 import com.onlinesweetmart.exception.IdNotFoundException;
 import com.onlinesweetmart.exception.ProductNotFoundException;
 
@@ -15,5 +16,5 @@ public interface ProductService {
 
 	public Product showAllProducts(Integer productId) throws ProductNotFoundException;
 
-	public List<Product> showAllProducts();
+	public List<Product> showAllProducts() throws EmptyProductListException;
 }

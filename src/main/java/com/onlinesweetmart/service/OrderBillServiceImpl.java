@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.onlinesweetmart.entity.OrderBill;
 import com.onlinesweetmart.exception.IdNotFoundException;
+import com.onlinesweetmart.exception.CustomException;
 import com.onlinesweetmart.repository.OrderBillRepository;
 
 
@@ -89,7 +90,12 @@ public class OrderBillServiceImpl implements OrderBillService {
 	@Override
 	public List<OrderBill> showAllOrderBills() {
 		// TODO Auto-generated method stub
-		return (List<OrderBill>) orderBillRepository.findAll();
+		List<OrderBill> bill = orderBillRepository.findAll();
+		if(bill.isEmpty())
+		{
+			throw new CustomException("No order bill found");
+		}
+		return bill;
 	}
 
 	/*

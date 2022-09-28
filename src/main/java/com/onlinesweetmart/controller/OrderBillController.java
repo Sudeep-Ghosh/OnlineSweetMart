@@ -18,7 +18,7 @@ import com.onlinesweetmart.entity.OrderBill;
 import com.onlinesweetmart.service.OrderBillService;
 
 @RestController
-@RequestMapping(value="/api/v1")
+@RequestMapping(value="/api/v1/")
 public class OrderBillController {
 	
 	@Autowired
