@@ -89,7 +89,12 @@ public class OrderBillServiceImpl implements OrderBillService {
 	@Override
 	public List<OrderBill> showAllOrderBills() {
 		// TODO Auto-generated method stub
-		return (List<OrderBill>) orderBillRepository.findAll();
+		List<OrderBill> bill = orderBillRepository.findAll();
+		if(bill.isEmpty())
+		{
+			throw new CustomException("No order bill found");
+		}
+		return bill;
 	}
 
 	/*
