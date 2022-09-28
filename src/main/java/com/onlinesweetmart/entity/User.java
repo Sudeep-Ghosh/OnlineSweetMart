@@ -15,11 +15,7 @@ import lombok.NoArgsConstructor;
 @Data @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-<<<<<<< HEAD
 @Table(name = "users")
-=======
-@Table(name = "users") // change in name-user to users
->>>>>>> 164898db956d51ad25a6129c7abee5a2e32784cf
 public class User {
 	
 	@Id
@@ -29,12 +25,5 @@ public class User {
 	private String userName;
 	private String password;
 	private String passwordConfirm;
-<<<<<<< HEAD
 	private String type;	
-=======
-	private String type;
-	
-	//@OneToOne(mappedBy = "user")	
-	//public Admin admin;
->>>>>>> 164898db956d51ad25a6129c7abee5a2e32784cf
 }
