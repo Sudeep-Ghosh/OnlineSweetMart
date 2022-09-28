@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.onlinesweetmart.entity.Category;
 import com.onlinesweetmart.exception.EmptyCategoryListException;
 import com.onlinesweetmart.exception.IdNotFoundException;
+import com.onlinesweetmart.exception.InvalidCategoryDataException;
 import com.onlinesweetmart.repository.CategoryRepository;
 
 @Service
@@ -43,16 +44,19 @@ public class CategoryServiceImpl implements CategoryService {
 	 * */
 
 	@Override
-	public Category updateCategory(Category category) throws IdNotFoundException {
-		Category fetchCategory = categoryRepository.findById(category.getCategoryId()).get();
-
+	public Category updateCategory(Category category) throws IdNotFoundException, InvalidCategoryDataException {
+		Optional<Category> fetchCategory = categoryRepository.findById(category.getCategoryId());
+		
+		if(fetchCategory.isEmpty()) {
+			throw new IdNotFoundException("Category with category ID: "+category.getCategoryId()+" not available");
+		}
 		if (Objects.nonNull(category.getCategoryId()) && !"".equalsIgnoreCase(category.getName())) {
-			fetchCategory.setName(category.getName());
-			categoryRepository.save(fetchCategory);
-			return fetchCategory;
+			fetchCategory.get().setName(category.getName());
+			categoryRepository.save(fetchCategory.get());
+			return fetchCategory.get();
 		}
 		else {
-			throw new IdNotFoundException("Category with category ID: "+category.getCategoryId()+" not available");
+			throw new InvalidCategoryDataException("Invalid data input");
 		}
 	}
 	

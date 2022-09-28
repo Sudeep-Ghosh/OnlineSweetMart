@@ -130,4 +130,15 @@ public class GlobalException extends ResponseEntityExceptionHandler {
 		
 		return new ResponseEntity<ErrorInfo>(errorInfo, HttpStatus.NOT_FOUND);
 	}
+	
+	@ExceptionHandler(InvalidCategoryDataException.class)
+	public ResponseEntity<ErrorInfo> invalidCategoryDataException(InvalidCategoryDataException exception)
+	{
+		ErrorInfo errorInfo = new ErrorInfo();
+		errorInfo.setErrorMessage(exception.getMsg());
+		errorInfo.setStatus(HttpStatus.NOT_FOUND.toString());
+		errorInfo.setLocalDateTime(LocalDateTime.now());
+		
+		return new ResponseEntity<ErrorInfo>(errorInfo, HttpStatus.NOT_FOUND);
+	}
 }
