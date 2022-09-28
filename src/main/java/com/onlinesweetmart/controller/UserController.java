@@ -28,7 +28,11 @@ public class UserController {
 		return userService.addUser(user);
 	}
 	
+<<<<<<< HEAD
 	@PutMapping("/user")
+=======
+	@PutMapping("/user/{userId}")
+>>>>>>> 164898db956d51ad25a6129c7abee5a2e32784cf
 	public User updateUser(@RequestBody User user)
 	{
 		return userService.updateUser(user);

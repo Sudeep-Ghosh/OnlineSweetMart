@@ -109,8 +109,35 @@ public class GlobalException extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<ErrorInfo>(errorInfo, HttpStatus.NOT_FOUND);
 	}
 	
+<<<<<<< HEAD
 	@ExceptionHandler(UserAlreadyExistsException.class)
 	public ResponseEntity<ErrorInfo> userAlreadyExistsException(UserAlreadyExistsException exception)
+=======
+	@ExceptionHandler(EmptyCategoryListException.class)
+	public ResponseEntity<ErrorInfo> emptyCategoryListException(EmptyCategoryListException exception)
+	{
+		ErrorInfo errorInfo = new ErrorInfo();
+		errorInfo.setErrorMessage(exception.getMsg());
+		errorInfo.setStatus(HttpStatus.NOT_FOUND.toString());
+		errorInfo.setLocalDateTime(LocalDateTime.now());
+		
+		return new ResponseEntity<ErrorInfo>(errorInfo, HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(EmptyProductListException.class)
+	public ResponseEntity<ErrorInfo> emptyProductListException(EmptyProductListException exception)
+	{
+		ErrorInfo errorInfo = new ErrorInfo();
+		errorInfo.setErrorMessage(exception.getMsg());
+		errorInfo.setStatus(HttpStatus.NOT_FOUND.toString());
+		errorInfo.setLocalDateTime(LocalDateTime.now());
+		
+		return new ResponseEntity<ErrorInfo>(errorInfo, HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(InvalidCategoryDataException.class)
+	public ResponseEntity<ErrorInfo> invalidCategoryDataException(InvalidCategoryDataException exception)
+>>>>>>> 164898db956d51ad25a6129c7abee5a2e32784cf
 	{
 		ErrorInfo errorInfo = new ErrorInfo();
 		errorInfo.setErrorMessage(exception.getMsg());

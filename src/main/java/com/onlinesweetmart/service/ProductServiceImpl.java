@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.onlinesweetmart.entity.Product;
+import com.onlinesweetmart.exception.EmptyProductListException;
 import com.onlinesweetmart.exception.IdNotFoundException;
 import com.onlinesweetmart.exception.ProductNotFoundException;
 import com.onlinesweetmart.repository.ProductRepository;
@@ -136,8 +137,13 @@ public class ProductServiceImpl implements ProductService {
 	 * */
 	
 	@Override
-	public List<Product> showAllProducts() {
-		return productRepository.findAll();
+	public List<Product> showAllProducts() throws EmptyProductListException {
+		List<Product> fetchProducts = productRepository.findAll();
+		
+		if(fetchProducts.isEmpty()) {
+			throw new EmptyProductListException("No products found in the product list");
+		}
+		return fetchProducts;
 	}
 
 }

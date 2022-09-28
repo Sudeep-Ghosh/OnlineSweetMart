@@ -10,25 +10,28 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.onlinesweetmart.entity.SweetOrder;
 import com.onlinesweetmart.service.SweetOrderService;
 
 @RestController
+@RequestMapping("/api/v1")
 public class SweetOrderController {
 
 	@Autowired
 	private SweetOrderService sweetOrderService;
 	
 	@PostMapping("/sweetorder")
-	public ResponseEntity<SweetOrder>  addSweetOrder(SweetOrder sweetOrder) {
+	public ResponseEntity<SweetOrder>  addSweetOrder(@RequestBody SweetOrder sweetOrder) {
 		// TODO Auto-generated method stub
 		return new ResponseEntity<SweetOrder>(sweetOrderService.addSweetOrder(sweetOrder), HttpStatus.CREATED) ;
 	}
 
 	@PutMapping("/sweetorder")
-	public  ResponseEntity<SweetOrder> updateSweetOrder(SweetOrder sweetOrder) {
+	public  ResponseEntity<SweetOrder> updateSweetOrder(@RequestBody SweetOrder sweetOrder) {
 		
 		return new ResponseEntity<SweetOrder>(sweetOrderService.updateSweetOrder(sweetOrder), HttpStatus.CREATED);
 	}
