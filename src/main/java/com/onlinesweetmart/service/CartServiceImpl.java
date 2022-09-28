@@ -49,7 +49,7 @@ public class CartServiceImpl implements CartService {
 		
 		List<Cart> listCart = cartRepository.findAll();
 		if(listCart.isEmpty()) {
-			throw new CartNotFoundException("no cart is found")
+			throw new CartNotFoundException("no cart is found");
 		}
 		return listCart;
 	}
