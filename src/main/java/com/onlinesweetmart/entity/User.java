@@ -8,12 +8,14 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Data @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Table(name = "users") // change in name-user to users
 public class User {
 	
@@ -26,6 +28,6 @@ public class User {
 	private String passwordConfirm;
 	private String type;
 	
-	@OneToOne(mappedBy = "user")	
-	public Admin admin;
+	//@OneToOne(mappedBy = "user")	
+	//public Admin admin;
 }
