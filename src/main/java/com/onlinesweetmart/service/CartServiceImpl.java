@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.onlinesweetmart.entity.Cart;
 import com.onlinesweetmart.exception.IdNotFoundException;
+import com.onlinesweetmart.exception.CartNotFoundException;
 import com.onlinesweetmart.repository.CartRepository;
 
 @Service
@@ -46,7 +47,11 @@ public class CartServiceImpl implements CartService {
 	@Override
 	public List<Cart> showAllCarts(){
 		
-		return (List<Cart>) cartRepository.findAll();
+		List<Cart> listCart = cartRepository.findAll();
+		if(listCart.isEmpty()) {
+			throw new CartNotFoundException("no cart is found")
+		}
+		return listCart;
 	}
 	
 	
