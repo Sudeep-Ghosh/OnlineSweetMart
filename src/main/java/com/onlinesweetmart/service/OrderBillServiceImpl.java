@@ -1,14 +1,15 @@
 package com.onlinesweetmart.service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.onlinesweetmart.entity.OrderBill;
-import com.onlinesweetmart.exception.IdNotFoundException;
 import com.onlinesweetmart.exception.CustomException;
+import com.onlinesweetmart.exception.IdNotFoundException;
 import com.onlinesweetmart.repository.OrderBillRepository;
 
 
@@ -45,16 +46,25 @@ public class OrderBillServiceImpl implements OrderBillService {
 	@Override
 	public OrderBill updateOrderBill(OrderBill orderBill) {
 		// TODO Auto-generated method stub
-		OrderBill existingOrderBill = new OrderBill();
-		if(orderBillRepository.existsById(orderBill.getOrderBillId())) {
-		existingOrderBill.setCreatedDate(orderBill.getCreatedDate());
-		existingOrderBill.setTotalCost(orderBill.getTotalCost());
-		
-		return orderBillRepository.save(existingOrderBill);
+		Optional<OrderBill> existingOrderBill = orderBillRepository.findById(orderBill.getOrderBillId());
+
+		if (existingOrderBill.isPresent()) {
+			if (Objects.nonNull(orderBill.getCreatedDate())) {
+				existingOrderBill.get().setCreatedDate(orderBill.getCreatedDate());
+			}
+
+			if (Objects.nonNull(orderBill.getTotalCost())) {
+				existingOrderBill.get().setTotalCost(orderBill.getTotalCost());
+			}
+
+			orderBillRepository.save(existingOrderBill.get());
+			return existingOrderBill.get();
 		}
+
 		else {
-			throw new IdNotFoundException("The given Id is not present");
+			throw new IdNotFoundException("Order Bill with ID: " + orderBill.getOrderBillId() + " not available.");
 		}
+
 	}
 
 	/*
