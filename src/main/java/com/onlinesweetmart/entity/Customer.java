@@ -33,7 +33,7 @@ public class Customer {
 	private String userName;
 
 	@OneToMany(cascade = CascadeType.ALL)
-	private List<SweetOrder> sweetOrders;
+	private Set<SweetOrder> sweetOrders;
 
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<SweetItem> sweetItems;
