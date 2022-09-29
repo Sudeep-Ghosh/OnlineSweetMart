@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -14,24 +16,20 @@ import lombok.Data;
 @Entity @Data
 public class SweetOrder {
 	
-	/*
-	 * Class User, Map<Product,Long> are kept commented till further connectivity.
-	 */
-	
-	@Id
+	@Id 
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int sweetOrderId;
 	
 	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private User user;
+	@JoinColumn(name = "userId")
+	private Customer customer;
 	
 	@OneToMany
-	@JoinColumn(name = "listItem_id")
+	@JoinColumn
 	private List<SweetItem> listItems;
 	
 	private LocalDate createdDate;
-	
-	
+
 	//private Map<Product, Long> groupedProducts;
 	
 
