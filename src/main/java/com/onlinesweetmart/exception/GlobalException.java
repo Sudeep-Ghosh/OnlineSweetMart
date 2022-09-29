@@ -55,6 +55,39 @@ public class GlobalException extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<ErrorInfo>(errorInfo, HttpStatus.NOT_FOUND);
 	}
 	
+	@ExceptionHandler(EmptyProductListException.class)
+	public ResponseEntity<ErrorInfo> emptyProductListException(EmptyProductListException exception)
+	{
+		ErrorInfo errorInfo = new ErrorInfo();
+		errorInfo.setErrorMessage(exception.getMsg());
+		errorInfo.setStatus(HttpStatus.NOT_FOUND.toString());
+		errorInfo.setLocalDateTime(LocalDateTime.now());
+		
+		return new ResponseEntity<ErrorInfo>(errorInfo, HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(EmptyCategoryListException.class)
+	public ResponseEntity<ErrorInfo> emptyCategoryListException(EmptyCategoryListException exception)
+	{
+		ErrorInfo errorInfo = new ErrorInfo();
+		errorInfo.setErrorMessage(exception.getMsg());
+		errorInfo.setStatus(HttpStatus.NOT_FOUND.toString());
+		errorInfo.setLocalDateTime(LocalDateTime.now());
+		
+		return new ResponseEntity<ErrorInfo>(errorInfo, HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(InvalidCategoryDataException.class)
+	public ResponseEntity<ErrorInfo> invalidCategoryDataException(InvalidCategoryDataException exception)
+	{
+		ErrorInfo errorInfo = new ErrorInfo();
+		errorInfo.setErrorMessage(exception.getMsg());
+		errorInfo.setStatus(HttpStatus.NOT_FOUND.toString());
+		errorInfo.setLocalDateTime(LocalDateTime.now());
+		
+		return new ResponseEntity<ErrorInfo>(errorInfo, HttpStatus.NOT_FOUND);
+	}
+	
 	@ExceptionHandler(InvalidUserNameException.class)
 	public ResponseEntity<ErrorInfo> invalidUserNameException(InvalidUserNameException exception)
 	{
@@ -119,4 +152,6 @@ public class GlobalException extends ResponseEntityExceptionHandler {
 		
 		return new ResponseEntity<ErrorInfo>(errorInfo, HttpStatus.NOT_FOUND);
 	}
+	
+	
 }
