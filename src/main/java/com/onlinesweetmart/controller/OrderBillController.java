@@ -18,13 +18,13 @@ import com.onlinesweetmart.entity.OrderBill;
 import com.onlinesweetmart.service.OrderBillService;
 
 @RestController
-@RequestMapping(value="/api/v1/")
+@RequestMapping(value="/api/v1")
 public class OrderBillController {
 	
 	@Autowired
 	OrderBillService orderBillService;
 	
-	@PostMapping(value="orderBill")
+	@PostMapping(value="orderbill")
 	ResponseEntity<OrderBill> addOrderBill(@RequestBody OrderBill orderBill){
 		
 		OrderBill orderBill2 = orderBillService.addOrderBill(orderBill);
@@ -32,15 +32,14 @@ public class OrderBillController {
 		return new ResponseEntity<OrderBill>(orderBill2, HttpStatus.OK);
 	}
 	
-	@PutMapping(value="orderBill")
+	@PutMapping(value="orderbill")
 	ResponseEntity<OrderBill> updateOrderBill(@RequestBody OrderBill orderBill){
 		
 		OrderBill orderBill3 = orderBillService.updateOrderBill(orderBill);
-		
 		return new ResponseEntity<OrderBill>(orderBill3, HttpStatus.OK);
 	}
 	
-	@DeleteMapping(value="orderBill/{id}")
+	@DeleteMapping(value="orderbill/{id}")
 	ResponseEntity<OrderBill> cancelOrderbill(@PathVariable int id){
 		
 		orderBillService.cancelOrderBill(id);
@@ -48,7 +47,7 @@ public class OrderBillController {
 		return new ResponseEntity<OrderBill>(HttpStatus.OK);
 	}
 	
-	@GetMapping(value="orderBills")
+	@GetMapping(value="orderbill")
 	ResponseEntity <List<OrderBill>> showAllOrderBills(){
 		
 		List<OrderBill> orderBills = orderBillService.showAllOrderBills();
@@ -56,7 +55,7 @@ public class OrderBillController {
 		return new ResponseEntity<List<OrderBill>>(orderBills, HttpStatus.OK);
 	}
 	
-	@GetMapping(value="orderBill/{id}")
+	@GetMapping(value="orderbill/{id}")
 	ResponseEntity<OrderBill> showOrderBillById(@PathVariable int id){
 		
 		OrderBill orderBill4 = orderBillService.showOrderBillById(id);

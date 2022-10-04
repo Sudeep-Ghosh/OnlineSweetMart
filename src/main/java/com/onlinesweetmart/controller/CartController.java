@@ -18,13 +18,13 @@ import com.onlinesweetmart.entity.Cart;
 import com.onlinesweetmart.service.CartService;
 
 @RestController
-@RequestMapping(value="/api/v1")
+@RequestMapping("/api/v1")
 public class CartController {
 	
 	@Autowired
 	CartService cartService;
 	
-	@PostMapping(value="addcart")
+	@PostMapping(value="cart")
 	ResponseEntity<Cart> addCart(@RequestBody Cart cart)
 	{
 		Cart cart2 = cartService.addCart(cart);
