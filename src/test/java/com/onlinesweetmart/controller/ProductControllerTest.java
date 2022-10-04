@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.onlinesweetmart.entity.Category;
 import com.onlinesweetmart.entity.Product;
 import com.onlinesweetmart.exception.IdNotFoundException;
 import com.onlinesweetmart.service.ProductService;
@@ -32,9 +33,9 @@ public class ProductControllerTest {
 
 	@BeforeEach
 	void productControllerTestSetup() {
-		//Category category = Category.builder().categoryId(1).name("Regular Sweets").build();
+		Category category = Category.builder().categoryId(1).name("Regular Sweets").build();
 		product = Product.builder().productId(12).name("Barfi").photoPath("www.google.com").price(150.44)
-				.description("best dessert").available(true).build();
+				.description("best dessert").available(true).category(category).build();
 	}
 
 	/*
@@ -52,9 +53,9 @@ public class ProductControllerTest {
 	@Test
 	@DisplayName("Test Product Controller module for addProduct controller")
 	public void addProductControllerTestCase() throws Exception {
-	//	Category inputCategory = Category.builder().categoryId(1).name("Regular Sweets").build();
+		Category inputCategory = Category.builder().categoryId(1).name("Regular Sweets").build();
 		Product inputProduct = Product.builder().productId(12).name("Barfi").photoPath("www.google.com").price(150.44)
-				.description("best dessert").available(true).build();
+				.description("best dessert").available(true).category(inputCategory).build();
 
 		Mockito.when(productService.addProduct(inputProduct)).thenReturn(product);
 
@@ -122,9 +123,9 @@ public class ProductControllerTest {
 	@Test
 	@DisplayName("Test Product Controller module for updateProduct controller")
 	public void updateProductControllerTestCase() throws Exception {
-		//Category inputCategory = Category.builder().categoryId(6).name("Gold Wrapper Sweets").build();
+		Category inputCategory = Category.builder().categoryId(6).name("Gold Wrapper Sweets").build();
 		Product inputProduct = Product.builder().productId(32).name("Muffins").photoPath("www.google.com").price(650.44)
-				.description("Light weight dessert").available(true).build();
+				.description("Light weight dessert").available(true).category(inputCategory).build();
 
 		Product outputProduct = inputProduct;
 		Mockito.when(productService.updateProduct(product)).thenReturn(outputProduct);

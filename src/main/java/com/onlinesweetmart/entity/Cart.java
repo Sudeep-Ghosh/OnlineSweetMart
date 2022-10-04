@@ -6,8 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -24,10 +24,14 @@ public class Cart {
 	private int cartId;
 	private double grandTotal;
 	
-	@OneToMany
-	@JoinColumn
+	@OneToMany(mappedBy = "cart")	
 	private List<Product> listProduct;
 	private int productCount;
 	private double total;	
-		
+	
+	//@OneToOne
+	//private Admin admin;
+	
+	@OneToOne
+	private Customer customer;
 }

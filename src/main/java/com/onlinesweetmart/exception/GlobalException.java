@@ -11,6 +11,16 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @RestControllerAdvice
 public class GlobalException extends ResponseEntityExceptionHandler {
 
+	@ExceptionHandler
+	public ResponseEntity<ErrorInfo> sweetItemNotFoundException(SweetItemNotFoundException exception){
+		
+		ErrorInfo errorInfo =  new ErrorInfo();
+		errorInfo.setErrorMessage(exception.getMsg());
+		errorInfo.setStatus(HttpStatus.NOT_FOUND.toString());
+		errorInfo.setLocalDateTime(LocalDateTime.now());
+		
+		return new ResponseEntity<ErrorInfo>(errorInfo, HttpStatus.NOT_FOUND);
+	}
 	
 	@ExceptionHandler
 	public ResponseEntity<ErrorInfo> customException(CustomException exception){
@@ -134,17 +144,6 @@ public class GlobalException extends ResponseEntityExceptionHandler {
 	
 	@ExceptionHandler(UserAlreadyExistsException.class)
 	public ResponseEntity<ErrorInfo> userAlreadyExistsException(UserAlreadyExistsException exception)
-	{
-		ErrorInfo errorInfo = new ErrorInfo();
-		errorInfo.setErrorMessage(exception.getMsg());
-		errorInfo.setStatus(HttpStatus.NOT_FOUND.toString());
-		errorInfo.setLocalDateTime(LocalDateTime.now());
-		
-		return new ResponseEntity<ErrorInfo>(errorInfo, HttpStatus.NOT_FOUND);
-	}
-	
-	@ExceptionHandler(CartNotFoundException.class)
-	public ResponseEntity<ErrorInfo> cartNotFoundException(CartNotFoundException exception)
 	{
 		ErrorInfo errorInfo = new ErrorInfo();
 		errorInfo.setErrorMessage(exception.getMsg());

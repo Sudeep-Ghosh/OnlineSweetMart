@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.onlinesweetmart.entity.Customer;
 import com.onlinesweetmart.entity.SweetOrder;
 import com.onlinesweetmart.exception.CustomException;
+import com.onlinesweetmart.repository.SweetItemRepository;
 import com.onlinesweetmart.repository.SweetOrderRepository;
 
 /*
@@ -20,6 +21,8 @@ import com.onlinesweetmart.repository.SweetOrderRepository;
 @Service
 public class SweetOrderServiceImpl implements SweetOrderService {
 
+	@Autowired
+	SweetItemRepository sweetItemRepository;
 
 	@Autowired
 	private SweetOrderRepository sweetOrderRepository;
@@ -70,6 +73,7 @@ public class SweetOrderServiceImpl implements SweetOrderService {
 
 		if (sweetOrderRepository.existsById(sweetOrder.getSweetOrderId())) {
 			sweetOrder2.setCreatedDate(LocalDate.now());
+			sweetOrder2.setListItems(sweetOrder.getListItems());
 			sweetOrder2.setCustomer(sweetOrder.getCustomer());
 
 			return sweetOrder2;

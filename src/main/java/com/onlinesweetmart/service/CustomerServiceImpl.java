@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.onlinesweetmart.entity.Customer;
-import com.onlinesweetmart.exception.EmptyCustomerListException;
 import com.onlinesweetmart.exception.IdNotFoundException;
+import com.onlinesweetmart.exception.EmptyCustomerListException;
 import com.onlinesweetmart.repository.CustomerRepository;
 
 @Service
@@ -53,6 +53,7 @@ public class CustomerServiceImpl implements CustomerService {
 			throw new IdNotFoundException("Cutomer has not found to update details");
 		} else {
 			existingCustomer.setUserName(customer.getUserName());
+			existingCustomer.setSweetItems(customer.getSweetItems());
 			existingCustomer.setSweetOrders(customer.getSweetOrders());
 			existingCustomer.setCart(customer.getCart());
 			return customerRepository.save(existingCustomer);

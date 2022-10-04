@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import com.onlinesweetmart.entity.Category;
 import com.onlinesweetmart.entity.Product;
 import com.onlinesweetmart.exception.EmptyProductListException;
 import com.onlinesweetmart.exception.IdNotFoundException;
@@ -31,10 +32,10 @@ public class ProductServiceTest {
 
 	@BeforeEach
 	void productInitializerSetup() {
-		//Category category = Category.builder().categoryId(1).name("Regular Sweets").build();
+		Category category = Category.builder().categoryId(1).name("Regular Sweets").build();
 
 		Product product = Product.builder().productId(12).name("Barfi").photoPath("www.google.com").price(150.44)
-				.description("best dessert").available(true).build();
+				.description("best dessert").available(true).category(category).build();
 
 		Mockito.when(productRepository.save(product)).thenReturn(product);
 		Mockito.when(productRepository.findAll()).thenReturn(Collections.singletonList(product));
@@ -42,11 +43,11 @@ public class ProductServiceTest {
 
 	@BeforeEach
 	void productFetchByIdSetup() {
-	//	Category category = Category.builder().categoryId(5).name("Gold wrapper Sweets").build();
+		Category category = Category.builder().categoryId(5).name("Gold wrapper Sweets").build();
 
 		Optional<Product> product = Optional
 				.ofNullable(Product.builder().productId(15).name("Black forest").photoPath("www.google.com")
-						.price(550.44).description("Brown chocholate cake").available(true).build());
+						.price(550.44).description("Brown chocholate cake").available(true).category(category).build());
 
 		Mockito.when(productRepository.findById(product.get().getProductId())).thenReturn(product);
 	}
@@ -66,10 +67,10 @@ public class ProductServiceTest {
 	@Test
 	@DisplayName("Test Product Service to add product based on valid Product data")
 	public void addProductTestCase() {
-		//Category category = Category.builder().categoryId(1).name("Regular Sweets").build();
+		Category category = Category.builder().categoryId(1).name("Regular Sweets").build();
 
 		Product product = Product.builder().productId(12).name("Barfi").photoPath("www.google.com").price(150.44)
-				.description("best dessert").available(true).build();
+				.description("best dessert").available(true).category(category).build();
 
 		Product fetchProduct = productService.addProduct(product);
 
@@ -91,10 +92,10 @@ public class ProductServiceTest {
 	@Test
 	@DisplayName("Test Product Service to fetch all products from DB")
 	public void showAllProductsTestCase() throws EmptyProductListException {
-	//	Category category = Category.builder().categoryId(1).name("Regular Sweets").build();
+		Category category = Category.builder().categoryId(1).name("Regular Sweets").build();
 
 		Product product = Product.builder().productId(12).name("Barfi").photoPath("www.google.com").price(150.44)
-				.description("best dessert").available(true).build();
+				.description("best dessert").available(true).category(category).build();
 
 		List<Product> fetchProduct = productService.showAllProducts();
 
@@ -116,10 +117,10 @@ public class ProductServiceTest {
 	@Test
 	@DisplayName("Test Product Service to fetch respective data on valid product data")
 	public void showProductByIdTestCase() throws ProductNotFoundException {
-		//Category category = Category.builder().categoryId(5).name("Gold wrapper Sweets").build();
+		Category category = Category.builder().categoryId(5).name("Gold wrapper Sweets").build();
 
 		Product product = Product.builder().productId(15).name("Black forest").photoPath("www.google.com").price(550.44)
-				.description("Brown chocholate cake").available(true).build();
+				.description("Brown chocholate cake").available(true).category(category).build();
 
 		Product fetchProduct = productService.showAllProducts(product.getProductId());
 
@@ -141,10 +142,10 @@ public class ProductServiceTest {
 	@Test
 	@DisplayName("Test Product Service to fetch respective data and update it")
 	public void updateProductTestCase() throws IdNotFoundException {
-		//Category category = Category.builder().categoryId(5).name("Gold wrapper Sweets").build();
+		Category category = Category.builder().categoryId(5).name("Gold wrapper Sweets").build();
 
 		Product product = Product.builder().productId(15).name("Black forest").photoPath("www.google.com").price(550.44)
-				.description("Brown chocholate cake").available(true).build();
+				.description("Brown chocholate cake").available(true).category(category).build();
 
 		Product fetchProduct = productService.updateProduct(product);
 
@@ -166,10 +167,10 @@ public class ProductServiceTest {
 	@Test
 	@DisplayName("Test Product Service to perform cancel service")
 	public void cancelProductTestCase() throws IdNotFoundException {
-		//Category category = Category.builder().categoryId(5).name("Gold wrapper Sweets").build();
+		Category category = Category.builder().categoryId(5).name("Gold wrapper Sweets").build();
 
 		Product product = Product.builder().productId(15).name("Black forest").photoPath("www.google.com").price(550.44)
-				.description("Brown chocholate cake").available(true).build();
+				.description("Brown chocholate cake").available(true).category(category).build();
 
 		Product fetchCanceledProduct = productService.cancelProduct(product.getProductId());
 
