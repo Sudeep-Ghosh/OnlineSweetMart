@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.onlinesweetmart.entity.Cart;
-import com.onlinesweetmart.exception.IdNotFoundException;
 import com.onlinesweetmart.exception.CartNotFoundException;
+import com.onlinesweetmart.exception.IdNotFoundException;
 import com.onlinesweetmart.repository.CartRepository;
 
 @Service
@@ -70,7 +70,7 @@ public class CartServiceImpl implements CartService {
 		
 		Cart existingCart = new Cart();
 		if(cartRepository.existsById(cart.getCartId())) {
-		existingCart.setCustomer(cart.getCustomer());
+			existingCart.setCartId(cart.getCartId());
 		existingCart.setGrandTotal(cart.getGrandTotal());
 		existingCart.setListProduct(cart.getListProduct());
 		existingCart.setProductCount(cart.getProductCount());
