@@ -23,15 +23,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "product")
 public class Product {
 	@Id
-	@SequenceGenerator(
-			name = "product_sequence",
-			sequenceName = "product_sequence",
-			allocationSize = 5
-			)
-	@GeneratedValue(
-			strategy = GenerationType.SEQUENCE,
-			generator = "product_sequence"
-			)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer productId;
 	private String name;
 	private String photoPath;
